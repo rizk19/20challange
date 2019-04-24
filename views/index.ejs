@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>Hello, world!</title>
+  <style>
+    .table-hover tbody tr:hover td {
+      background: lightsalmon;
+      opacity: 0.9 !important;
+    }
+
+    .table-hover tbody tr:hover th {
+      background: coral !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 style="margin-top:50px">BREAD(Browse,Read,Edit,Add,Delete)</h1>
+    <h3>Filters</h3>
+    <form action="/" method="GET">
+      <input type="hidden" name="page" value="1">
+      <div class="form-group row col-sm-12">
+        <div class="form-check col-sm-1">
+          <input type="checkbox" name='ck1' class="form-check-input" id="ck1" <%= (query.ck1) ? 'checked': '' %> >
+        </div>
+        <label for="ID" class="col-sm-1 col-form-label "
+          style="color:whitesmoke;background-color: coral;border-radius: 5px">ID</label>
+        <div class="col-sm-10">
+          <input type="text" name="idbox" class="form-control" id="idbox" value="<%= query.idbox %>" placeholder="ID">
+        </div>
+      </div>
+      <div class="form-group row col-sm-12">
+        <div class="form-check col-sm-1">
+          <input type="checkbox" name='ck2' class="form-check-input" id="ck2" <%= (query.ck2) ? 'checked': '' %> >
+        </div>
+        <label for="String" class="col-sm-1 col-form-label" style="color:coral">String</label>
+        <div class="col-sm-10">
+          <input type="text" name="string" class="form-control" id="string" value="<%= query.string %>" placeholder="String">
+        </div>
+      </div>
+      <div class="form-group row col-sm-12">
+        <div class="form-check col-sm-1">
+          <input type="checkbox" name='ck3' class="form-check-input" id="ck3" <%= (query.ck3) ? 'checked': '' %> >
+        </div>
+        <label for="Integer" class="col-sm-1 col-form-label" style="color:coral">Integer</label>
+        <div class="col-sm-10">
+          <input type="text" name="integer" class="form-control" id="integer" value="<%= query.integer %>" placeholder="Integer">
+        </div>
+      </div>
+      <div class="form-group row col-sm-12">
+        <div class="form-check col-sm-1">
+          <input type="checkbox" name='ck4' class="form-check-input" id="ck4" <%= (query.ck4) ? 'checked': '' %> >
+        </div>
+        <label for="Float" class="col-sm-1 col-form-label" style="color:coral">Float</label>
+        <div class="col-sm-10">
+          <input type="text" name="float" class="form-control" id="Float" value="<%= query.float %>" placeholder="float">
+        </div>
+      </div>
+      <div class="form-group row col-sm-12">
+        <div class="form-check col-sm-1">
+          <input type="checkbox" name='ck5' class="form-check-input" id="ck5" <%= (query.ck5) ? 'checked': '' %> >
+        </div>
+        <label for="Date" class="col-sm-1 col-form-label" style="color:coral">Date</label>
+        <div class="col-sm-5">
+          <input class="form-control" id="datestart" name="datestart" value="<%= query.datestart %>" placeholder="Start Date"
+            onfocus="(this.type='date')">
+        </div>
+        <label for="Date" class="col-sm-5 col-form-label" style="color:coral"></label>
+        <label for="Date" class="col-sm-2 col-form-label" style="color:coral"></label>
+        to
+        <div class="col-sm-12"></div>
+        <label for="Date" class="col-sm-2 col-form-label" style="color:coral"></label>
+        <div class="col-sm-5">
+          <input placeholder="End Date" class="form-control" id="dateend" name="dateend" value="<%= query.dateend %>" onfocus="(this.type='date')">
+        </div>
+      </div>
+      <div class="form-group row col-sm-12">
+        <div class="form-check col-sm-1">
+          <input type="checkbox" name='ck6' class="form-check-input" id="ck6" <%= (query.ck6) ? 'checked': '' %>>
+        </div>
+        <label for="Boolean" class="col-sm-1 col-form-label" style="color:coral">Boolean</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="boolean" name="boolean" placeholder="Choose boolean">
+            <option disabled>Choose boolean</option>
+            <option>True</option>
+            <option>False</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn" style="background-color:coral;color: cornsilk">Search</button>
+      <a href="/" class="btn btn-danger">Reset</a>
+    </form>
+
+    <table class="table table-hover table-light" style="margin-top:50px">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">String</th>
+          <th scope="col">Integer</th>
+          <th scope="col">Float</th>
+          <th scope="col">Date</th>
+          <th scope="col">Boolean</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody><%data.forEach((item,index)=>{%>
+        <tr>
+          <td><%=item.id%></td>
+          <td><%=item.string%></td>
+          <td><%=item.integer%></td>
+          <td><%=item.float%></td>
+          <td><%=item.date%></td>
+          <td><%=item.boolean%></td>
+          <td><a href='edit/<%=item.id%>' class="btn" style="background-color:lime;color: rgb(9, 37, 0)">Edit</a>
+            <a href='delete/<%=item.id%>' class="btn" data-toggle="popover" data-placement="bottom"
+              data-content="menghapus data akan berakibat data hilang dan tidak bisa kembali"
+              style="background-color:crimson;color: whitesmoke">Delete</a></td>
+        </tr>
+        <%})%>
+      </tbody>
+    </table>
+    <nav aria-label="page navigation">
+      <ul class="pagination">
+        <li class="page-item<%= pagination.page == 1 ? ' disabled' : '' %>"><a class="page-link" href="/?page=<%= parseInt(pagination.page) - 1 %>">Previous</a></li>
+        <% for (let i = 1; i<= pagination.pages; i++){ %>
+        <li class="page-item"><a class="page-link" href="<%= pagination.url.replace(`page=${pagination.page}`, `page=${i}`) %>"> <%= i %></a></li>
+        <% } %>
+        <li class="page-item<%= pagination.page >= pagination.pages ? ' disabled' : '' %>"><a class="page-link" href="/?page=<%= parseInt(pagination.page) + 1 %>">Next</a></li>
+      </ul>
+    </nav>
+    <a href='/add' class="btn" style="background-color:coral;color: cornsilk">Add</a>
+
+
+
+  </div>
+</body>
+
+</html>
